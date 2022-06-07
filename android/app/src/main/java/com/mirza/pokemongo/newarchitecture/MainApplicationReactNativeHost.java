@@ -1,4 +1,4 @@
-package com.challengechapter8mirza.newarchitecture;
+package com.mirza.pokemongo.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.challengechapter8mirza.BuildConfig;
-import com.challengechapter8mirza.newarchitecture.components.MainComponentsRegistry;
-import com.challengechapter8mirza.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.mirza.pokemongo.BuildConfig;
+import com.mirza.pokemongo.newarchitecture.components.MainComponentsRegistry;
+import com.mirza.pokemongo.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

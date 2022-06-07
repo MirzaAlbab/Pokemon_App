@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.challengechapter8mirza">
+  package="com.mirza.pokemongo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -1,4 +1,4 @@
-package com.challengechapter8mirza.newarchitecture.components;
+package com.mirza.pokemongo.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

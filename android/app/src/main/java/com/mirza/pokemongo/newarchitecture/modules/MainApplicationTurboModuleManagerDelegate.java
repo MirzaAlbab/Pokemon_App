@@ -1,4 +1,4 @@
-package com.challengechapter8mirza.newarchitecture.modules;
+package com.mirza.pokemongo.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

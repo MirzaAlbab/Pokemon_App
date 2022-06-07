@@ -1,4 +1,4 @@
-package com.challengechapter8mirza;
+package com.mirza.pokemongo;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "challengechapter8Mirza";
+    return "PokemonApp";
   }
 
   /**

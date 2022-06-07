@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "challengechapter8Mirza.app"
-               BlueprintName = "challengechapter8Mirza"
-               ReferencedContainer = "container:challengechapter8Mirza.xcodeproj">
+               BuildableName = "PokemonApp.app"
+               BlueprintName = "PokemonApp"
+               ReferencedContainer = "container:PokemonApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "challengechapter8MirzaTests.xctest"
-               BlueprintName = "challengechapter8MirzaTests"
-               ReferencedContainer = "container:challengechapter8Mirza.xcodeproj">
+               BuildableName = "PokemonAppTests.xctest"
+               BlueprintName = "PokemonAppTests"
+               ReferencedContainer = "container:PokemonApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "challengechapter8Mirza.app"
-            BlueprintName = "challengechapter8Mirza"
-            ReferencedContainer = "container:challengechapter8Mirza.xcodeproj">
+            BuildableName = "PokemonApp.app"
+            BlueprintName = "PokemonApp"
+            ReferencedContainer = "container:PokemonApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "challengechapter8Mirza.app"
-            BlueprintName = "challengechapter8Mirza"
-            ReferencedContainer = "container:challengechapter8Mirza.xcodeproj">
+            BuildableName = "PokemonApp.app"
+            BlueprintName = "PokemonApp"
+            ReferencedContainer = "container:PokemonApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
