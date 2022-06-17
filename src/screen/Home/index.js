@@ -12,6 +12,8 @@ import {baseUrl} from '../../helper/api';
 import Colors from '../../helper/Colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+
 export default function Home({navigation}) {
   const [pokeList, setPokeList] = useState([]);
   const [pokeListBackup, setPokeListBackup] = useState([]);
@@ -69,7 +71,14 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Pokemon</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={styles.header}>Pokemon</Text>
+        <TouchableOpacity
+          style={{marginRight: 20, marginTop: 30}}
+          onPress={() => navigation.navigate('PokeBag')}>
+          <SimpleLineIcons name="handbag" size={25} color={Colors.white} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.searchContainer}>
         <TextInput
           placeholder="Search by Name"
