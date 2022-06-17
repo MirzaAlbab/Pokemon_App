@@ -22,18 +22,6 @@ export default function Animation() {
     }).start();
   };
 
-  // const fadeInBall = () => {
-  //   Animated.timing(fade, {
-  //     toValue: 1,
-  //     duration: 1000,
-  //     useNativeDriver: true,
-  //   }).start();
-  // };
-
-  // useEffect(() => {
-  //   fadeInBall();
-  // });
-
   return (
     <View style={styles.container}>
       <Animated.View
@@ -60,9 +48,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     backgroundColor: 'red',
-
-    // opacity,
-    // marginLeft: leftvalue,
   },
   button: {
     backgroundColor: 'blue',

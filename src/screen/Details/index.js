@@ -55,9 +55,34 @@ export default function Detail({route, navigation}) {
 
   const MainView = () => (
     <ScrollView>
-      <View style={{marginHorizontal: 20, marginTop: 10}}>
+      <View
+        style={{
+          marginHorizontal: 20,
+          marginTop: 10,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome5 name="chevron-left" size={30} color={Colors.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: Colors.white,
+            borderRadius: 10,
+            padding: 10,
+            borderWidth: 1,
+            borderColor: Colors.white,
+            elevation: 5,
+          }}>
+          <Text
+            style={{
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: 'bold',
+              textTransform: 'capitalize',
+            }}>
+            Catch
+          </Text>
         </TouchableOpacity>
       </View>
       <View
