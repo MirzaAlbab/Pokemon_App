@@ -11,12 +11,16 @@ import {Formik} from 'formik';
 import {SignInSchema} from '../../components/ValidationYup';
 import Logo from '../../components/Logo';
 import SimpleToast from 'react-native-simple-toast';
+import {useDispatch} from 'react-redux';
+import {setUser} from './redux/action';
 export default function Login({navigation}) {
+  const dispatch = useDispatch();
   const _onLogin = async values => {
     try {
       await auth()
         .signInWithEmailAndPassword(values.email, values.password)
-        .then(() => {
+        .then(val => {
+          dispatch(setUser(val));
           SimpleToast.show('Login Success', SimpleToast.SHORT);
           navigation.navigate('Home');
         })

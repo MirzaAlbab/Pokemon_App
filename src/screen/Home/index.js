@@ -42,7 +42,6 @@ export default function Home({navigation}) {
       <PokePic name={item.name} />
     </TouchableOpacity>
   );
-
   const renderFooter = () => {
     return (
       <View
