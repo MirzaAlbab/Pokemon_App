@@ -9,26 +9,31 @@ import {
 import React, {useState, useEffect} from 'react';
 import PokePic from '../../components/PokePic';
 import {baseUrl} from '../../helper/api';
+
 import Colors from '../../helper/Colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Animation from '../../components/Animation';
 
 export default function Home({navigation}) {
   const [pokeList, setPokeList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [pokeListBackup, setPokeListBackup] = useState([]);
   const [currentpage, setCurrentPage] = useState(1);
   const getPokemon = async () => {
+    setLoading(true);
     const res = await fetch(`${baseUrl}pokemon?limit=10&offset=${currentpage}`);
     const data = await res.json();
     console.log(data);
     setPokeList(data.results);
     setPokeListBackup(data.results);
+    setLoading(false);
   };
 
   useEffect(() => {
     getPokemon();
-  }, []);
+  }, [currentpage]);
 
   const handleSearch = async val => {
     const searching = val.toLowerCase();
@@ -98,16 +103,19 @@ export default function Home({navigation}) {
           style={{position: 'absolute', left: 15, top: '33%'}}
         />
       </View>
-
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{padding: 10}}
-        numColumns={2}
-        data={pokeList}
-        renderItem={RenderPokemon}
-        keyExtractor={item => item.name.toString()}
-        ListFooterComponent={renderFooter}
-      />
+      {loading ? (
+        <Animation />
+      ) : (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{padding: 10}}
+          numColumns={2}
+          data={pokeList}
+          renderItem={RenderPokemon}
+          keyExtractor={item => item.name.toString()}
+          ListFooterComponent={renderFooter}
+        />
+      )}
     </View>
   );
 }

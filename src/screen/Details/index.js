@@ -4,7 +4,6 @@ import {
   View,
   Image,
   SafeAreaView,
-  ActivityIndicator,
   ScrollView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -12,6 +11,7 @@ import Colors from '../../helper/Colors';
 import axios from 'axios';
 import * as Progress from 'react-native-progress';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Animation from './../../components/Animation';
 
 export default function Detail({route, navigation}) {
   const {name} = route.params;
@@ -325,13 +325,7 @@ export default function Detail({route, navigation}) {
 
   return (
     <SafeAreaView style={{backgroundColor: `${Colors[color]}`, flex: 1}}>
-      {loading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator size="large" color={Colors.primary} />
-        </View>
-      ) : (
-        <MainView />
-      )}
+      {loading ? <Animation /> : <MainView />}
     </SafeAreaView>
   );
 }
