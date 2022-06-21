@@ -6,24 +6,29 @@ import {
   TextInput,
   Text,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import auth from '@react-native-firebase/auth';
+import React, {useState, useEffect, useCallback} from 'react';
 import PokePic from '../../components/PokePic';
 import {baseUrl} from '../../helper/api';
-
 import Colors from '../../helper/Colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Animation from '../../components/Animation';
+import {setUser} from '../Login/redux/action';
+import {ms} from 'react-native-size-matters';
 
 export default function Home({navigation}) {
   const [pokeList, setPokeList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [currentOffset, setCurrentOffset] = useState(0);
   const [pokeListBackup, setPokeListBackup] = useState([]);
   const [currentpage, setCurrentPage] = useState(1);
   const getPokemon = async () => {
     setLoading(true);
-    const res = await fetch(`${baseUrl}pokemon?limit=10&offset=${currentpage}`);
+    const res = await fetch(
+      `${baseUrl}pokemon?limit=10&offset=${currentOffset}`,
+    );
     const data = await res.json();
     console.log(data);
     setPokeList(data.results);
@@ -33,12 +38,40 @@ export default function Home({navigation}) {
 
   useEffect(() => {
     getPokemon();
-  }, [currentpage]);
+  }, [currentOffset]);
+
+  const nextpage = useCallback(() => {
+    setCurrentOffset(currentOffset + 10);
+    setCurrentPage(currentpage + 1);
+  }, [currentOffset, currentpage]);
+
+  const prevpage = useCallback(() => {
+    if (currentpage > 1) {
+      setCurrentOffset(currentOffset - 10);
+      setCurrentPage(currentpage - 1);
+    } else {
+      setCurrentOffset(0);
+      setCurrentPage(1);
+    }
+  }, [currentOffset, currentpage]);
 
   const handleSearch = async val => {
     const searching = val.toLowerCase();
     console.log(searching);
     setPokeList(pokeListBackup.filter(it => it.name.match(searching)));
+  };
+
+  const signOut = async () => {
+    try {
+      await auth()
+        .signOut()
+        .then(() => {
+          navigation.navigate('Login');
+          setUser(null);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const RenderPokemon = ({item}) => (
@@ -59,7 +92,7 @@ export default function Home({navigation}) {
           justifyContent: 'center',
           marginVertical: 10,
         }}>
-        <TouchableOpacity onPress={() => setCurrentPage(currentpage + 1)}>
+        <TouchableOpacity onPress={prevpage}>
           <MaterialIcons
             name="navigate-before"
             size={30}
@@ -67,7 +100,7 @@ export default function Home({navigation}) {
           />
         </TouchableOpacity>
         <Text style={styles.page}>{currentpage}</Text>
-        <TouchableOpacity onPress={() => setCurrentPage(currentpage + 1)}>
+        <TouchableOpacity onPress={nextpage}>
           <MaterialIcons name="navigate-next" size={30} color={Colors.white} />
         </TouchableOpacity>
       </View>
@@ -79,9 +112,14 @@ export default function Home({navigation}) {
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={styles.header}>Pokemon</Text>
         <TouchableOpacity
-          style={{marginRight: 20, marginTop: 30}}
+          style={{marginTop: ms(30)}}
           onPress={() => navigation.navigate('PokeBag')}>
           <SimpleLineIcons name="handbag" size={25} color={Colors.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={signOut}
+          style={{marginRight: ms(20), marginTop: ms(30)}}>
+          <FontAwesome5 name="sign-out-alt" size={25} color={Colors.white} />
         </TouchableOpacity>
       </View>
       <View style={styles.searchContainer}>

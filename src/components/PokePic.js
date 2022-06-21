@@ -1,35 +1,36 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Colors from './../helper/Colors';
+import pokeball from './../asset/images/pokeball-2.png';
 import axios from 'axios';
 
 export default function PokePic({name, navigation}) {
   useEffect(() => {
-    getPicture();
-    getColor();
+    // getPicture();
+    // getColor();
   }, []);
 
   const [image, setImage] = useState();
   const [color, setColor] = useState([]);
 
-  const getPicture = async () => {
-    const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-    setImage(data.sprites.front_default);
-  };
+  // const getPicture = async () => {
+  //   const {data} = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+  //   setImage(data.sprites.front_default);
+  // };
 
-  const getColor = async () => {
-    const {data} = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon-species/${name}`,
-    );
-    setColor(data.color.name);
-  };
+  // const getColor = async () => {
+  //   const {data} = await axios.get(
+  //     `https://pokeapi.co/api/v2/pokemon-species/${name}`,
+  //   );
+  //   setColor(data.color.name);
+  // };
 
   return (
     <View style={{flex: 1}}>
       <View
         style={{
           flex: 1,
-          backgroundColor: Colors[color],
+          backgroundColor: Colors.primary,
           margin: 6,
           padding: 10,
           borderRadius: 10,
@@ -42,7 +43,7 @@ export default function PokePic({name, navigation}) {
             alignItems: 'center',
           }}>
           <Image
-            source={{uri: image}}
+            source={pokeball}
             style={{
               width: 100,
               height: 100,

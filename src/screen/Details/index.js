@@ -12,10 +12,12 @@ import axios from 'axios';
 import * as Progress from 'react-native-progress';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Animation from './../../components/Animation';
+import {Rdb} from '../../helper/Rdb';
+import {useSelector} from 'react-redux';
 
 export default function Detail({route, navigation}) {
   const {name} = route.params;
-
+  const {user} = useSelector(state => state.login);
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
   const [species, setSpecies] = useState([]);
@@ -53,6 +55,25 @@ export default function Detail({route, navigation}) {
     setDesc(data.flavor_text_entries[1]);
   };
 
+  const catchPokemon = () => {
+    try {
+      Rdb.ref(`pokeBag/${user.user.uid}`).push({
+        name: [...pokemon.name],
+      });
+      // Alert.alert('Selamat', 'Anda mengoleksi pokemon baru', [
+      //   {
+      //     text: 'Lihat Bag',
+      //     onPress: () => {
+      //       navigation.navigate('PokeBag');
+      //     },
+      //   },
+      //   {text: 'OK', onPress: () => console.log('OK Pressed!')},
+      // ]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const MainView = () => (
     <ScrollView>
       <View
@@ -66,6 +87,7 @@ export default function Detail({route, navigation}) {
           <FontAwesome5 name="chevron-left" size={30} color={Colors.white} />
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={catchPokemon}
           style={{
             backgroundColor: Colors.white,
             borderRadius: 10,

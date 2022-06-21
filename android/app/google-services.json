@@ -1,79 +1,33 @@
 {
   "project_info": {
-    "project_number": "893578154504",
-    "firebase_url": "https://challenge-rn-131bc-default-rtdb.firebaseio.com",
-    "project_id": "challenge-rn-131bc",
-    "storage_bucket": "challenge-rn-131bc.appspot.com"
+    "project_number": "537234629137",
+    "project_id": "pokemon-5208e",
+    "storage_bucket": "pokemon-5208e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:893578154504:android:517545b9237739b5cdf7bd",
-        "android_client_info": {
-          "package_name": "com.learnfirebase"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "893578154504-aa45ht6t4lgko5im5bv0rklacffp9ln3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.learnfirebase",
-            "certificate_hash": "060b5e494b851cf0e4eb23e2db3abdc9195cdb13"
-          }
-        },
-        {
-          "client_id": "893578154504-8gjpkl6qecjjbimagfsca9eota69o7a6.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD4dpnBDgTBsBMLcNmg-WIjh4fcWesIKxw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "893578154504-8gjpkl6qecjjbimagfsca9eota69o7a6.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:893578154504:android:1209133e8448e06bcdf7bd",
+        "mobilesdk_app_id": "1:537234629137:android:fb82da5be7285fae0f47b0",
         "android_client_info": {
           "package_name": "com.mirza.pokemongo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "893578154504-nh0v0554i9sb90a74cuf3fg1u65j1f2i.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mirza.pokemongo",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "893578154504-8gjpkl6qecjjbimagfsca9eota69o7a6.apps.googleusercontent.com",
+          "client_id": "537234629137-kdqqfcv97i99fjnp0m1aqs4nmcrgfebg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD4dpnBDgTBsBMLcNmg-WIjh4fcWesIKxw"
+          "current_key": "AIzaSyBfTbm_Z9HclwntxIHmKUZnNbMcPE_AK_A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "893578154504-8gjpkl6qecjjbimagfsca9eota69o7a6.apps.googleusercontent.com",
+              "client_id": "537234629137-kdqqfcv97i99fjnp0m1aqs4nmcrgfebg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
