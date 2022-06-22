@@ -13,7 +13,6 @@ import {baseUrl} from '../../helper/api';
 import Colors from '../../helper/Colors';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Animation from '../../components/Animation';
 import {setUser} from '../Login/redux/action';
 import {ms} from 'react-native-size-matters';
@@ -30,7 +29,6 @@ export default function Home({navigation}) {
       `${baseUrl}pokemon?limit=10&offset=${currentOffset}`,
     );
     const data = await res.json();
-    console.log(data);
     setPokeList(data.results);
     setPokeListBackup(data.results);
     setLoading(false);
@@ -55,11 +53,18 @@ export default function Home({navigation}) {
     }
   }, [currentOffset, currentpage]);
 
-  const handleSearch = async val => {
-    const searching = val.toLowerCase();
-    console.log(searching);
-    setPokeList(pokeListBackup.filter(it => it.name.match(searching)));
-  };
+  // const handleSearch = async val => {
+  //   const searching = val.toLowerCase();
+  //   console.log(searching);
+  //   const res = await fetch(`${baseUrl}pokemon/${searching}`);
+  //   const data = await res.json();
+  //   if (data) {
+  //     setPokeList(data);
+  //     console.log('execute');
+  //   }
+  //   // setPokeList(pokeListBackup);
+  //   // setPokeList(pokeListBackup.filter(it => it.name.match(searching)));
+  // };
 
   const signOut = async () => {
     try {
@@ -79,7 +84,7 @@ export default function Home({navigation}) {
       style={{flex: 1}}
       activeOpacity={0.9}
       onPress={() => navigation.navigate('Detail', {name: item.name})}>
-      <PokePic name={item.name} />
+      <PokePic name={item.name ?? item.species.name} />
     </TouchableOpacity>
   );
   const renderFooter = () => {
@@ -107,14 +112,27 @@ export default function Home({navigation}) {
     );
   };
 
+  const emptydata = () => {
+    return (
+      <View style={styles.empty}>
+        <Text style={styles.emptyText}>No Data</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <Text style={styles.header}>Pokemon</Text>
+        {/* <TouchableOpacity
+          style={{marginTop: ms(5), marginRight: ms(-25)}}
+          onPress={() => navigation.navigate('Pokebag')}>
+          <FontAwesome5 name="shopping-bag" size={25} color={Colors.white} />
+        </TouchableOpacity> */}
         <TouchableOpacity
-          style={{marginTop: ms(30)}}
-          onPress={() => navigation.navigate('PokeBag')}>
-          <SimpleLineIcons name="handbag" size={25} color={Colors.white} />
+          onPress={() => navigation.navigate('Search')}
+          style={{marginTop: ms(25)}}>
+          <FontAwesome5 name="search" size={25} color={Colors.white} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={signOut}
@@ -122,7 +140,7 @@ export default function Home({navigation}) {
           <FontAwesome5 name="sign-out-alt" size={25} color={Colors.white} />
         </TouchableOpacity>
       </View>
-      <View style={styles.searchContainer}>
+      {/* <View style={styles.searchContainer}>
         <TextInput
           placeholder="Search by Name"
           style={{
@@ -133,14 +151,14 @@ export default function Home({navigation}) {
             color: Colors.white,
           }}
           placeholderTextColor={Colors.white}
-          onChangeText={value => handleSearch(value)}
+          onEndEditing={event => handleSearch(event.nativeEvent.text)}
         />
         <FontAwesome5
           name="search"
           color={Colors.white}
           style={{position: 'absolute', left: 15, top: '33%'}}
         />
-      </View>
+      </View> */}
       {loading ? (
         <Animation />
       ) : (
@@ -149,6 +167,7 @@ export default function Home({navigation}) {
           contentContainerStyle={{padding: 10}}
           numColumns={2}
           data={pokeList}
+          ListEmptyComponent={emptydata}
           renderItem={RenderPokemon}
           keyExtractor={item => item.name.toString()}
           ListFooterComponent={renderFooter}
@@ -191,6 +210,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     borderRadius: 8,
     height: 40,
+    color: Colors.white,
+  },
+  empty: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  emptyText: {
+    fontSize: 20,
+    fontWeight: 'bold',
     color: Colors.white,
   },
 });

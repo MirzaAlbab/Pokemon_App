@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Colors from './../helper/Colors';
-import pokeball from './../asset/images/pokeball-2.png';
+import pokeball from '../asset/images/pokeball-2.png';
 import axios from 'axios';
 
 export default function PokePic({name, navigation}) {

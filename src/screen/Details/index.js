@@ -5,6 +5,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Colors from '../../helper/Colors';
@@ -12,9 +13,9 @@ import axios from 'axios';
 import * as Progress from 'react-native-progress';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Animation from './../../components/Animation';
-import {Rdb} from '../../helper/Rdb';
+import {ms} from 'react-native-size-matters';
 import {useSelector} from 'react-redux';
-
+import database from '@react-native-firebase/database';
 export default function Detail({route, navigation}) {
   const {name} = route.params;
   const {user} = useSelector(state => state.login);
@@ -25,6 +26,7 @@ export default function Detail({route, navigation}) {
   const [stats, setStats] = useState([]);
   const [desc, setDesc] = useState([]);
   const [abilities, setAbilities] = useState([]);
+  const [bag, Setbag] = useState({name: []});
 
   useEffect(() => {
     getPokemonDetails();
@@ -56,35 +58,26 @@ export default function Detail({route, navigation}) {
   };
 
   const catchPokemon = () => {
-    try {
-      Rdb.ref(`pokeBag/${user.user.uid}`).push({
-        name: [...pokemon.name],
-      });
-      // Alert.alert('Selamat', 'Anda mengoleksi pokemon baru', [
-      //   {
-      //     text: 'Lihat Bag',
-      //     onPress: () => {
-      //       navigation.navigate('PokeBag');
-      //     },
-      //   },
-      //   {text: 'OK', onPress: () => console.log('OK Pressed!')},
-      // ]);
-    } catch (error) {
-      console.log(error);
-    }
+    database().ref(`pokeBag/${user.user.uid}`).push({name: name});
+    Alert.alert('Success', 'Pokemon added to your bag');
   };
 
   const MainView = () => (
     <ScrollView>
       <View
         style={{
-          marginHorizontal: 20,
-          marginTop: 10,
+          marginHorizontal: ms(20),
+          marginTop: ms(10),
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <FontAwesome5 name="chevron-left" size={30} color={Colors.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{marginTop: ms(5), marginRight: ms(-25)}}
+          onPress={() => navigation.navigate('Pokebag')}>
+          <FontAwesome5 name="shopping-bag" size={25} color={Colors.white} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={catchPokemon}

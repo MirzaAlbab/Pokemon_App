@@ -1,24 +1,33 @@
-import {StyleSheet, FlatList, View} from 'react-native';
+import {Text, FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {Rdb} from '../../helper/Rdb';
+import {useSelector} from 'react-redux';
+import Animation from '../../components/Animation';
+import database from '@react-native-firebase/database';
+import Colors from '../../helper/Colors';
 import PokePic from '../../components/PokePic';
 
-export default function PokeBag() {
-  const [pokemons, setPokemons] = useState([]);
+export default function Pokebag({navigation}) {
+  const [pokeList, setPokeList] = useState([]);
+  const {user} = useSelector(state => state.login);
+  const [loading, setLoading] = useState(false);
 
-  const getPokemons = async () => {
-    try {
-      const res = await Rdb.ref(`pokeBag/${_user._id}/`).once('value');
-      console.log('RES POKEBAG: ', res.val());
-      setPokemons(res.val().name);
-    } catch (error) {
-      console.log(error);
-    }
+  const getPokemon = async () => {
+    setLoading(true);
+    await database()
+      .ref(`pokeBag/${user.user.uid}`)
+      .once('value')
+      .then(res => {
+        if (res.val()) {
+          setPokeList(Object.values(res.val()));
+        }
+      });
+
+    setLoading(false);
   };
 
   useEffect(() => {
-    getPokemons();
-  });
+    getPokemon();
+  }, []);
 
   const RenderPokemon = ({item}) => (
     <TouchableOpacity
@@ -28,18 +37,57 @@ export default function PokeBag() {
       <PokePic name={item.name} />
     </TouchableOpacity>
   );
+
+  const emptyList = () => {
+    return (
+      <View style={styles.emptyList}>
+        <Text style={styles.emptyListText}>
+          You don't have any pokemon in your pokebag
+        </Text>
+      </View>
+    );
+  };
+
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.header}>Pokemon Bag</Text>
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding: 10}}
         numColumns={2}
-        data={pokemons}
+        ListEmptyComponent={emptyList}
+        data={pokeList}
         renderItem={RenderPokemon}
-        keyExtractor={item => item.name.toString()}
+        keyExtractor={item => item.name}
       />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#455a64',
+  },
+  header: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: Colors.white,
+    marginTop: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  emptyList: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  emptyListText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.white,
+  },
+});
